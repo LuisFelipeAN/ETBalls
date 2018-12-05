@@ -2,19 +2,23 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TargetScriptController : MonoBehaviour {
+public class ScriptTargetController : MonoBehaviour {
     private SphereCollider boxCollider;
     private Rigidbody rigidbody;
+    private MeshCollider meshCollider;
     private Vector3 position;
     private Quaternion rotation;
     private bool acertado;
 
+    
+
     // Use this for initialization
     void Start () {
         boxCollider = GetComponent<SphereCollider>();
+        meshCollider = GetComponent<MeshCollider>();
         rigidbody = GetComponent<Rigidbody>();
-        position = transform.position;
-        rotation = transform.rotation;
+        position = transform.localPosition;
+        rotation = transform.localRotation;
         acertado = false;
     }
 	
@@ -22,20 +26,26 @@ public class TargetScriptController : MonoBehaviour {
 	void Update () {
         if (!acertado)
         {
-            transform.position = position;
-            transform.rotation = rotation;
+            transform.localPosition = position;
+            transform.localRotation = rotation;
         }
 	}
 
     private void OnCollisionEnter(Collision collision)
     {
         
-        if (collision.collider.name.StartsWith("PrefabBolaVerde"))
+        if (collision.collider.name.StartsWith("PrefabBolaVerde")&&!acertado)
         {
+            ScriptEnemyController parentScript = GetComponentInParent<ScriptEnemyController>();
+            transform.parent = parentScript.getParent();
+
             rigidbody.useGravity = true;
             rigidbody.isKinematic = false;
             boxCollider.enabled = false;
+            meshCollider.enabled = true;
             acertado = true;
+
+            parentScript.destroy();
         }
     }
 }

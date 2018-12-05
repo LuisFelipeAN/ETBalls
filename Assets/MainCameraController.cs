@@ -41,6 +41,8 @@ public class MainCameraController : MonoBehaviour {
             b.gameObject.transform.position = transform.position;
             Debug.Log(ray.direction + ", " + shotImpulse);
             b.AddForce(ray.direction * shotImpulse);
+        }else if(Input.GetMouseButtonDown(1)){
+            transform.localRotation = initialOrientation;
         }
         if (Input.GetKey(KeyCode.LeftArrow)&&!paredeEsquerda)
         {
@@ -63,5 +65,5 @@ public class MainCameraController : MonoBehaviour {
         paredeDireita=Physics.Raycast(transform.position, Vector3.right, distanciaMaxParede);
         paredeEsquerda = Physics.Raycast(transform.position, Vector3.left, distanciaMaxParede);
     }
-
+    
 }
