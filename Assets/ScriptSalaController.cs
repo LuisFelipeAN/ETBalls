@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ScriptSalaController : MonoBehaviour {
+public class ScriptSalaController : MonoBehaviour,IObserver {
     public GameObject canonPrefab;
     public GameObject enemyPrefab;
     public Transform player;
@@ -14,8 +14,8 @@ public class ScriptSalaController : MonoBehaviour {
     private float minY, maxY;
     private float minZ, maxZ;
     private int altura, comprimento, largura;
-    
-    
+
+    private bool gameOver;
     private static Cell[][][] mat;
     private static int numInimigosAtivos;
     private static int maxInimigosAtivosPeriodicamente=7;
@@ -34,6 +34,11 @@ public class ScriptSalaController : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
+        DadosJogo.getInstance().getGame().addObserver(this);
+
+
+        gameOver = false;
+        Debug.Log("sala "+DadosJogo.getInstance().Vida);
 
         Vector3 cannonSize = canonPrefab.GetComponent<MeshRenderer>().bounds.size;
 
@@ -71,7 +76,6 @@ public class ScriptSalaController : MonoBehaviour {
                 mat[x][y] = new Cell[comprimento];
                 for (int z = 0; z < comprimento; z++)
                 {
-                    //mat[x][y][z] = new Cell();
                     mat[x][y][z].ocupada = false;
                     mat[x][y][z].position = new Vector3(minX + x * d.x + d.x / 2, minY + y * d.y + d.y / 2, minZ + z * d.z + d.z / 2);
                 }
@@ -81,40 +85,48 @@ public class ScriptSalaController : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
-        if (time > timeSpanw)
+        if (!gameOver)
         {
-            if (numInimigosAtivos < maxInimigosAtivosPeriodicamente)
+            if (time > timeSpanw)
             {
-                int x, y, z;
-                x = RandomGenerator.Instance.getRamdom(0, largura);
-                y = RandomGenerator.Instance.getRamdom(0, altura);
-                z = RandomGenerator.Instance.getRamdom(0, comprimento);
-   
-                Debug.Log(x + ", " + y + ", " + z);
-                int tentativas = 0;
-                while (mat[x][y][z].ocupada && tentativas < 100)
+                if (numInimigosAtivos < maxInimigosAtivosPeriodicamente)
                 {
+                    int x, y, z;
                     x = RandomGenerator.Instance.getRamdom(0, largura);
                     y = RandomGenerator.Instance.getRamdom(0, altura);
                     z = RandomGenerator.Instance.getRamdom(0, comprimento);
-                    tentativas++;
-                }
-                if (!mat[x][y][z].ocupada)
-                {
-                    mat[x][y][z].ocupada = true;
-                    Vector3 positionCanon = mat[x][y][z].position;
 
-                    GameObject enemy = Object.Instantiate(enemyPrefab);
-                    enemy.transform.position = positionCanon;
-                    ScriptEnemyController scriptEnemyController = enemy.GetComponent<ScriptEnemyController>();
-                    scriptEnemyController.player = player;
-                    scriptEnemyController.CellPosition = new Vector3Int(x, y, z);
-                    numInimigosAtivos++;
+                    //Debug.Log(x + ", " + y + ", " + z);
+                    int tentativas = 0;
+                    while (mat[x][y][z].ocupada && tentativas < 100)
+                    {
+                        x = RandomGenerator.Instance.getRamdom(0, largura);
+                        y = RandomGenerator.Instance.getRamdom(0, altura);
+                        z = RandomGenerator.Instance.getRamdom(0, comprimento);
+                        tentativas++;
+                    }
+                    if (!mat[x][y][z].ocupada)
+                    {
+                        mat[x][y][z].ocupada = true;
+                        Vector3 positionCanon = mat[x][y][z].position;
+
+                        GameObject enemy = Object.Instantiate(enemyPrefab);
+                        enemy.transform.position = positionCanon;
+                        ScriptEnemyController scriptEnemyController = enemy.GetComponent<ScriptEnemyController>();
+                        scriptEnemyController.player = player;
+                        scriptEnemyController.CellPosition = new Vector3Int(x, y, z);
+                        numInimigosAtivos++;
+                    }
                 }
+                time = 0;
             }
-            time = 0;
+            time += Time.deltaTime;
         }
-        time += Time.deltaTime;
+        
+    }
 
+    public void notify()
+    {
+        gameOver = DadosJogo.getInstance().GameOver;
     }
 }

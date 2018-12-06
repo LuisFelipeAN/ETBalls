@@ -321,6 +321,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e51331a9212f4b4d9193e579782882f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  valorPontos: 15
 --- !u!114 &114470661004114262
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -335,6 +336,7 @@ MonoBehaviour:
   bolaPrefab: {fileID: 1108205190795318, guid: f056f82f04bf6314c9a08d0a1466674b, type: 2}
   shootInpulse: 1500
   timeShootInterval: 0.3
+  timeDelayToStartShoot: 1
 --- !u!114 &114631377115521142
 MonoBehaviour:
   m_ObjectHideFlags: 1

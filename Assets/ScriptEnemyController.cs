@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ScriptEnemyController : MonoBehaviour {
+public class ScriptEnemyController : MonoBehaviour,IObserver {
     public Transform player;
     
     public float aberturaMaxima=90;
@@ -13,7 +13,7 @@ public class ScriptEnemyController : MonoBehaviour {
     public float maxIncinacao = -40f;
     float inclinacao;
     private Vector3Int cellPosition;
-
+    private bool gameOver;
     public Vector3Int CellPosition
     {
         set { cellPosition = value; }
@@ -31,7 +31,9 @@ public class ScriptEnemyController : MonoBehaviour {
     }
     // Use this for initialization
     void Start () {
+        DadosJogo.getInstance().getGame().addObserver(this);
 
+        gameOver = false;
         transform.LookAt(player);
         inclinacao=RandomGenerator.Instance.getRamdom(10 * Mathf.FloorToInt(maxIncinacao), 0) /10;
 
@@ -55,16 +57,26 @@ public class ScriptEnemyController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (aberturaAtual > aberturaMaxima/2)
+        if (!gameOver)
         {
+            if (aberturaAtual > aberturaMaxima / 2)
+            {
 
-            speedR = -speedR;
-        }else if (aberturaAtual < -aberturaMaxima / 2)
-        {
-            speedR = -speedR;
+                speedR = -speedR;
+            }
+            else if (aberturaAtual < -aberturaMaxima / 2)
+            {
+                speedR = -speedR;
+            }
+            aberturaAtual += Time.deltaTime * speedR;
+
+            transform.rotation = Quaternion.Euler(inclinacao, initialRotation + aberturaAtual, 0);
         }
-        aberturaAtual += Time.deltaTime * speedR;
+    }
 
-        transform.rotation = Quaternion.Euler(inclinacao, initialRotation+aberturaAtual, 0);
+    public void notify()
+    {
+
+        gameOver = DadosJogo.getInstance().GameOver;
     }
 }

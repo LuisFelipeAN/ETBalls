@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class ScriptTargetController : MonoBehaviour {
+    public int valorPontos;
+
     private SphereCollider boxCollider;
     private Rigidbody rigidbody;
     private MeshCollider meshCollider;
@@ -44,7 +46,7 @@ public class ScriptTargetController : MonoBehaviour {
             boxCollider.enabled = false;
             meshCollider.enabled = true;
             acertado = true;
-
+            DadosJogo.getInstance().Pontos = DadosJogo.getInstance().Pontos + valorPontos;
             parentScript.destroy();
         }
     }
