@@ -62,7 +62,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\DadosJogo.cs" />
-    <Compile Include="Assets\Game.cs" />
+    <Compile Include="Assets\GameState.cs" />
     <Compile Include="Assets\IObserver.cs" />
     <Compile Include="Assets\MainCameraController.cs" />
     <Compile Include="Assets\RandomGenerator.cs" />

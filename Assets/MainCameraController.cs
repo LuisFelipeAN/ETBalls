@@ -9,11 +9,13 @@ public class MainCameraController : MonoBehaviour,IObserver {
     public float shotImpulse=1000f;
     public float distanciaMaxParede = 0.5f;
     public Rigidbody bullet;
+    public RectTransform mira;
 
     public int numMaxBolas=150;
     public  Text textBolas;
     public  Text textPontos;
-
+    public RectTransform RectTransformVida;
+    public int MaxVida = 100;
     public Camera cam;
 
     private float mouseH = 0;
@@ -23,16 +25,23 @@ public class MainCameraController : MonoBehaviour,IObserver {
     private bool paredeDireita, paredeEsquerda;
     private Vector3 deslocamentoLateral;
     private int bolas;
+    private float dv;
 
     private bool gameOver;
     // Use this for initialization
+
     void Start () {
         gameOver = false;
+        dv = RectTransformVida.sizeDelta.x / MaxVida;
+
         DadosJogo.getInstance().addObserver(this);
-        
+        DadosJogo.getInstance().Vida = MaxVida;
+
+       
+
         initialOrientation = transform.localRotation;
         deslocamentoLateral = new Vector3();
-        //Cursor.visible = false;
+        Cursor.visible = false;
     }
 	
 	// Update is called once per frame
@@ -85,6 +94,7 @@ public class MainCameraController : MonoBehaviour,IObserver {
                 deslocamentoLateral.z = transform.position.z;
                 transform.position = deslocamentoLateral;
             }
+            mira.transform.position = Input.mousePosition;
         }
       
         
@@ -99,5 +109,7 @@ public class MainCameraController : MonoBehaviour,IObserver {
         gameOver = DadosJogo.getInstance().GameOver;
         textBolas.text = "Bolas: " + DadosJogo.getInstance().Bolas+ "/" + numMaxBolas;
         textPontos.text = "Pontos: " + DadosJogo.getInstance().Pontos;
+        RectTransformVida.sizeDelta = new Vector2(dv * DadosJogo.getInstance().Vida, RectTransformVida.sizeDelta.y);
     }
+    
 }

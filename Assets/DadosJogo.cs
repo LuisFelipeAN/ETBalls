@@ -6,7 +6,7 @@ public class DadosJogo : Subject {
     private int vida;
     private int bolas;
     private int pontos;
-    private Game game;
+    private GameState gameState;
 
     private float dv;
 
@@ -24,7 +24,7 @@ public class DadosJogo : Subject {
 
     private DadosJogo() : base()
     {
-        game = new Game();
+        gameState = new GameState();
         bolas = 0;
         pontos = 0;
     }
@@ -39,7 +39,7 @@ public class DadosJogo : Subject {
             vida = value;
             if (vida <= 0)
             {
-                game.GameOver = true;
+                gameState.GameOver = true;
             }
             notifyObservers();
         }
@@ -67,17 +67,17 @@ public class DadosJogo : Subject {
 
     public bool GameOver
     {
-        get { return game.GameOver; }
+        get { return gameState.GameOver; }
         set
         {
-            game.GameOver = value;
+            gameState.GameOver = value;
             notifyObservers();
         }
     }
 
-    public Game getGame()
+    public GameState getGame()
     {
-        return game;
+        return gameState;
     }
     
 }

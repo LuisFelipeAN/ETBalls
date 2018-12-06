@@ -203,6 +203,7 @@ RectTransform:
   - {fileID: 671915199}
   - {fileID: 1724255282}
   - {fileID: 1907807361}
+  - {fileID: 258061269}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -277,6 +278,75 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 21.142, y: -0.059000004, z: -0.31500003}
+--- !u!1 &258061268
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 258061269}
+  - component: {fileID: 258061271}
+  - component: {fileID: 258061270}
+  m_Layer: 5
+  m_Name: Mira
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &258061269
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 258061268}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 115666103}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -254.68, y: -109.47}
+  m_SizeDelta: {x: 20, y: 20}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &258061270
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 258061268}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_Sprite: {fileID: 21300000, guid: 293bca1da22084c47a596ef6e7ff6f16, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+--- !u!222 &258061271
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 258061268}
+  m_CullTransparentMesh: 0
 --- !u!1 &534669902
 GameObject:
   m_ObjectHideFlags: 0
@@ -372,9 +442,12 @@ MonoBehaviour:
   shotImpulse: 4000
   distanciaMaxParede: 0.5
   bullet: {fileID: 54150520057069792, guid: 4c8d5144ef3d90c45aea76b7afb5fed3, type: 2}
+  mira: {fileID: 258061269}
   numMaxBolas: 150
   textBolas: {fileID: 1724255283}
   textPontos: {fileID: 671915200}
+  RectTransformVida: {fileID: 1907807361}
+  MaxVida: 100
   cam: {fileID: 534669904}
 --- !u!1 &671915198
 GameObject:
@@ -551,9 +624,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4290eb42969aa5440b10d0aa995bfd85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  RectTransformVida: {fileID: 1907807361}
   corAoSerAtingido: {r: 0.8773585, g: 0.49247953, b: 0.49247953, a: 0.38431373}
-  MaxVida: 100
   danoPorAcerto: 5
   timeResetarAcerto: 0.5
 --- !u!1001 &755584804
