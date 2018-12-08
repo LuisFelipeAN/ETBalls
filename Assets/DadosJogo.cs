@@ -8,11 +8,8 @@ public class DadosJogo : Subject {
     private int pontos;
     private GameState gameState;
 
-    private float dv;
-
     private static DadosJogo instance;
 
-    
     public static DadosJogo getInstance()
     {
         if (instance == null)

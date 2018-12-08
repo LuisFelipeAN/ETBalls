@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 23265511700091240}
   - component: {fileID: 135612256961067044}
   - component: {fileID: 54150520057069792}
-  - component: {fileID: 114214000142919562}
+  - component: {fileID: 114372750704588886}
   m_Layer: 0
   m_Name: PrefabBolaVerde
   m_TagString: Untagged
@@ -101,7 +101,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 2
---- !u!114 &114214000142919562
+--- !u!114 &114372750704588886
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -109,9 +109,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1687146735941134}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f169bbf087b80a24c96bc340767628fa, type: 3}
+  m_Script: {fileID: 11500000, guid: 6f208dc062892ef448d3a2039600f195, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  timeToDisappear: 10
 --- !u!135 &135612256961067044
 SphereCollider:
   m_ObjectHideFlags: 1

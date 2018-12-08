@@ -7,6 +7,10 @@ public class ScriptSalaController : MonoBehaviour,IObserver {
     public GameObject enemyPrefab;
     public Transform player;
 
+    public float hordaCheckpointDuration = 20;
+    private bool reachedCheckpoint;
+    private float timeAfterCheckpoint;
+
     public float timeSpanw=3;
     private float time;
 
@@ -16,9 +20,11 @@ public class ScriptSalaController : MonoBehaviour,IObserver {
     private int altura, comprimento, largura;
 
     private bool gameOver;
+
     private static Cell[][][] mat;
     private static int numInimigosAtivos;
     private static int maxInimigosAtivosPeriodicamente=7;
+
     public static void desocuparMatriz(int x,int y,int z)
     {
         numInimigosAtivos--;
@@ -31,6 +37,11 @@ public class ScriptSalaController : MonoBehaviour,IObserver {
         public Vector3 position;
     }
 
+    public void startHordaCheckpoint()
+    {
+        reachedCheckpoint = true;
+        timeAfterCheckpoint = 0;
+    }
 
     // Use this for initialization
     void Start () {
@@ -63,7 +74,12 @@ public class ScriptSalaController : MonoBehaviour,IObserver {
         Debug.Log("altura: " + altura);
         Debug.Log("comprimento: " + comprimento);
 
+        inicialMatriz();
+        
+    }
 
+    private void inicialMatriz()
+    {
         mat = new Cell[largura][][];
 
         Vector3 d = new Vector3((maxX - minX) / largura, (maxY - minY) / altura, (maxZ - minZ) / comprimento);
@@ -82,43 +98,69 @@ public class ScriptSalaController : MonoBehaviour,IObserver {
             }
         }
     }
+    public void spanwEnemy()
+    {
+        int x, y, z;
+        x = RandomGenerator.Instance.getRamdom(0, largura);
+        y = RandomGenerator.Instance.getRamdom(0, altura);
+        z = RandomGenerator.Instance.getRamdom(0, comprimento);
+
+        //Debug.Log(x + ", " + y + ", " + z);
+        int tentativas = 0;
+        while (mat[x][y][z].ocupada && tentativas < 100)
+        {
+            x = RandomGenerator.Instance.getRamdom(0, largura);
+            y = RandomGenerator.Instance.getRamdom(0, altura);
+            z = RandomGenerator.Instance.getRamdom(0, comprimento);
+            tentativas++;
+        }
+        if (!mat[x][y][z].ocupada)
+        {
+            mat[x][y][z].ocupada = true;
+            Vector3 positionCanon = mat[x][y][z].position;
+
+            GameObject enemy = Object.Instantiate(enemyPrefab);
+            enemy.transform.position = positionCanon;
+            ScriptEnemyController scriptEnemyController = enemy.GetComponent<ScriptEnemyController>();
+            scriptEnemyController.player = player;
+            scriptEnemyController.CellPosition = new Vector3Int(x, y, z);
+            numInimigosAtivos++;
+        }
+    }
+
 
     // Update is called once per frame
     void Update () {
         if (!gameOver)
         {
-            if (time > timeSpanw)
+
+            if (!reachedCheckpoint)
             {
-                if (numInimigosAtivos < maxInimigosAtivosPeriodicamente)
+                if (time > timeSpanw)
                 {
-                    int x, y, z;
-                    x = RandomGenerator.Instance.getRamdom(0, largura);
-                    y = RandomGenerator.Instance.getRamdom(0, altura);
-                    z = RandomGenerator.Instance.getRamdom(0, comprimento);
-
-                    //Debug.Log(x + ", " + y + ", " + z);
-                    int tentativas = 0;
-                    while (mat[x][y][z].ocupada && tentativas < 100)
+                    if (numInimigosAtivos < maxInimigosAtivosPeriodicamente)
                     {
-                        x = RandomGenerator.Instance.getRamdom(0, largura);
-                        y = RandomGenerator.Instance.getRamdom(0, altura);
-                        z = RandomGenerator.Instance.getRamdom(0, comprimento);
-                        tentativas++;
+                        spanwEnemy();
                     }
-                    if (!mat[x][y][z].ocupada)
-                    {
-                        mat[x][y][z].ocupada = true;
-                        Vector3 positionCanon = mat[x][y][z].position;
-
-                        GameObject enemy = Object.Instantiate(enemyPrefab);
-                        enemy.transform.position = positionCanon;
-                        ScriptEnemyController scriptEnemyController = enemy.GetComponent<ScriptEnemyController>();
-                        scriptEnemyController.player = player;
-                        scriptEnemyController.CellPosition = new Vector3Int(x, y, z);
-                        numInimigosAtivos++;
-                    }
+                    time = 0;
                 }
-                time = 0;
+
+            }
+            else
+            {
+                if (time > timeSpanw/2)
+                {
+                    if (numInimigosAtivos < 2*maxInimigosAtivosPeriodicamente)
+                    {
+                        spanwEnemy();
+                    }
+                    time = 0;
+                }
+                timeAfterCheckpoint += Time.deltaTime;
+                if(timeAfterCheckpoint> hordaCheckpointDuration)
+                {
+                    reachedCheckpoint = false;
+                }
             }
             time += Time.deltaTime;
         }

@@ -18,6 +18,11 @@ public abstract class Subject
     {
         observers.Remove(o);
     }
+
+    public void removeAllObservers()
+    {
+        observers.Clear();
+    }
     protected void notifyObservers()
     {
         foreach(IObserver o in observers)
