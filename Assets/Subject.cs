@@ -25,7 +25,7 @@ public abstract class Subject
     }
     protected void notifyObservers()
     {
-        foreach(IObserver o in observers)
+        foreach (IObserver o in observers)
         {
             o.notify();
         }

@@ -225,7 +225,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3e9683807cb9fe419db52c2af35487b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mainMenuButton: {fileID: 1565341841}
 --- !u!114 &446672578
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -447,7 +446,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 90}
-  m_SizeDelta: {x: 700, y: 150}
+  m_SizeDelta: {x: 690, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &701174721
 MonoBehaviour:

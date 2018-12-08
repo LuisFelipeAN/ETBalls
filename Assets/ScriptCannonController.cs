@@ -8,6 +8,7 @@ public class ScriptCannonController : MonoBehaviour,IObserver {
     public float shootInpulse;
     public float timeShootInterval;
     public float timeDelayToStartShoot = 1f;
+
     private float timeDelay;
     private float time;
 
@@ -31,8 +32,9 @@ public class ScriptCannonController : MonoBehaviour,IObserver {
         gameOver = false;
     }
 
-	// Update is called once per frame
-	void Update () {
+    // Update is called once per frame
+    void Update()
+    {
         if (!gameOver)
         {
             if (timeDelay < timeDelayToStartShoot)
@@ -51,5 +53,5 @@ public class ScriptCannonController : MonoBehaviour,IObserver {
                 time += Time.deltaTime;
             }
         }
-	} 
+    }
 }

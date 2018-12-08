@@ -12,8 +12,6 @@ public class ScriptTargetController : MonoBehaviour {
     private Quaternion rotation;
     private bool acertado;
 
-    
-
     // Use this for initialization
     void Start () {
         boxCollider = GetComponent<SphereCollider>();

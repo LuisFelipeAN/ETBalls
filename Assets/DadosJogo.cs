@@ -77,4 +77,9 @@ public class DadosJogo : Subject {
         return gameState;
     }
     
+    public void clearObservers()
+    {
+        removeAllObservers();
+        gameState.removeAllObservers();
+    }
 }

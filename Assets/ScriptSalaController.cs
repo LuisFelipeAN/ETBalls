@@ -47,10 +47,7 @@ public class ScriptSalaController : MonoBehaviour,IObserver {
     void Start () {
         DadosJogo.getInstance().getGame().addObserver(this);
 
-
         gameOver = false;
-        Debug.Log("sala "+DadosJogo.getInstance().Vida);
-
         Vector3 cannonSize = canonPrefab.GetComponent<MeshRenderer>().bounds.size;
 
         float maxSizeCannon = Mathf.Max(cannonSize.x, cannonSize.y, cannonSize.z);

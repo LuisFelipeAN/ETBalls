@@ -11,7 +11,7 @@ public class GameOverPanelController : MonoBehaviour {
     private void Start()
     {
 
-        mainMenuButton= GameObject.Find("RestartButton").GetComponent<Button>();
+        mainMenuButton= GameObject.Find("MainMenuButton").GetComponent<Button>();
         mainMenuButton.onClick.AddListener(loadMainMenu);
     }
 

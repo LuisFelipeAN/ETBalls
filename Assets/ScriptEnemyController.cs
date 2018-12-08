@@ -4,16 +4,17 @@ using UnityEngine;
 
 public class ScriptEnemyController : MonoBehaviour,IObserver {
     public Transform player;
-    
     public float aberturaMaxima=90;
     public float rotationSpeed = 10;
+    public float maxIncinacao = -40f;
+
     private float aberturaAtual;
     private float initialRotation;
     private float speedR;
-    public float maxIncinacao = -40f;
-    float inclinacao;
+    private float inclinacao;
     private Vector3Int cellPosition;
     private bool gameOver;
+
     public Vector3Int CellPosition
     {
         set { cellPosition = value; }

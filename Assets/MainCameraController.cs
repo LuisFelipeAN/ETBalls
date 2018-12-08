@@ -10,19 +10,26 @@ public class MainCameraController : MonoBehaviour,IObserver {
     public float camSpeed=7f;
     public float shotImpulse=1000f;
     public float distanciaMaxParede = 0.5f;
-    public Rigidbody bullet;
 
-    public List<int> chekpoints;
-    public float timeMaxInformationCheckpointLoaded=3f;
-    private float timeCheckpointLoaded;
-    private bool onChekpointLoad;
-    public Button bntRestartOnCheckpointPrefab;
-    public Button bntMainMenuPrefab;
+
+    public int level = 1;
+    public bool isLastLevel;
+    public int pontosProximoNivel;
+
     public int numMaxBolas = 150;
     public int MaxVida = 100;
-   
     public float maxTime = 120;
 
+    public float timeMaxInformationCheckpointLoaded = 3f;
+    public List<int> chekpoints;
+    public int maxCheckpointRestarts = 3;
+
+    public Rigidbody bullet;
+    public Button bntRestartOnCheckpointPrefab;
+    public Button bntMainMenuPrefab;
+
+    private float timeCheckpointLoaded;
+    private bool onChekpointLoad;
     private Text timeText;
     private Canvas canvas;
     private Button bntRestartOnCheckpoint;
@@ -36,6 +43,7 @@ public class MainCameraController : MonoBehaviour,IObserver {
     private GameObject sala;
     private Text textInformationCheckpoint;
 
+    private int contCheckpointsRestarts;
     private float actualTime;
     
     private float mouseH = 0;
@@ -75,9 +83,12 @@ public class MainCameraController : MonoBehaviour,IObserver {
 
     void Start () {
         gameOver = false;
-
+        contCheckpointsRestarts = 0;
         actualCheckpoint = 0;
         dv = RectTransformVida.sizeDelta.x / MaxVida;
+
+        DadosJogo.getInstance().clearObservers();
+        DadosJogo.getInstance().getGame().Win = false;
         DadosJogo.getInstance().GameOver = false;
         DadosJogo.getInstance().Bolas = 0;
         DadosJogo.getInstance().Pontos = 0;
@@ -194,8 +205,23 @@ public class MainCameraController : MonoBehaviour,IObserver {
    
     public void notify()
     {
+        
+        if (DadosJogo.getInstance().Pontos >= pontosProximoNivel)
+        {
+            DadosJogo.getInstance().getGame().Win = true;
+            Cursor.visible = true;
+            if (isLastLevel)
+            {
+                SceneManager.LoadScene("Win", LoadSceneMode.Single);
+            }
+            else
+            {
+                SceneManager.LoadScene("Fase" + level + 1, LoadSceneMode.Single);
+            }
+        }
+
         gameOver = DadosJogo.getInstance().GameOver;
-        if (gameOver && chekpointDadosJogo.Count > 0)
+        if (gameOver && chekpointDadosJogo.Count > 0&& contCheckpointsRestarts<maxCheckpointRestarts)
         {
             textInformationCheckpoint.enabled = false;
             enableButtons();
@@ -204,10 +230,9 @@ public class MainCameraController : MonoBehaviour,IObserver {
         else if(gameOver)
         {
             Cursor.visible = true;
-            DadosJogo.getInstance().removeAllObservers();
             SceneManager.LoadScene("GameOver", LoadSceneMode.Single);
         }
-     
+       
         textBolas.text = "Bolas: " + DadosJogo.getInstance().Bolas+ "/" + numMaxBolas;
         textPontos.text = "Pontos: " + DadosJogo.getInstance().Pontos;
         RectTransformVida.sizeDelta = new Vector2(dv * DadosJogo.getInstance().Vida, RectTransformVida.sizeDelta.y);
@@ -258,6 +283,7 @@ public class MainCameraController : MonoBehaviour,IObserver {
     }
     public void loadLastCheckpoint()
     {
+
         DadosJogo.getInstance().GameOver = false;
         Chekpoint atual = chekpointDadosJogo[actualCheckpoint - 1];
         DadosJogo.getInstance().Bolas = atual.Bolas;
@@ -270,6 +296,8 @@ public class MainCameraController : MonoBehaviour,IObserver {
         textInformationCheckpoint.enabled = true;
         onChekpointLoad = true;
 
+        contCheckpointsRestarts++;
+
         scriptSalaController.startHordaCheckpoint();
 
         disableButtons();
@@ -278,7 +306,6 @@ public class MainCameraController : MonoBehaviour,IObserver {
 
     public void goToMainManu()
     {
-        DadosJogo.getInstance().removeAllObservers();
         chekpointDadosJogo.Clear();
         Cursor.visible = true;
         SceneManager.LoadScene("MainMenu", LoadSceneMode.Single);
