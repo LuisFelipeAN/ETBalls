@@ -2,15 +2,22 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+
+//classe para armazenar os dados do jogo
+//Padrões utilizados nessa classe: Singleton e Observer
+
+
 public class DadosJogo : Subject {
-    private int vida;
-    private int bolas;
-    private int pontos;
-    private GameState gameState;
+    private int vida;//vida atual do jogador
+    private int bolas;//numero de bolas disparadas
+    private int pontos;//pontos do jogador
 
-    private static DadosJogo instance;
+    private GameState gameState;//instancia da classe GameState que implementa o padrão observer
+                                //optou-se por coloca-la pois alguns elementos da interface observam apenas se é ou não game over
 
-    public static DadosJogo getInstance()
+    private static DadosJogo instance;//instancia da classe dados jogo necessaria para implementar o padrao singleton
+
+    public static DadosJogo getInstance()//metodo statico getInstance() necessario para implementar o padrao singleton
     {
         if (instance == null)
         {
@@ -19,14 +26,14 @@ public class DadosJogo : Subject {
         return instance;
     }
 
-    private DadosJogo() : base()
+    private DadosJogo() : base()//construtor privado necessario para implementar o padrao singleton
     {
         gameState = new GameState();
         bolas = 0;
         pontos = 0;
     }
 
-
+    //todos os metodos a segir possuem o estilo do padrao observer ou seja quando o mesmo for alterado notificar os observadores
     public int Vida
     {
         get { return vida; }

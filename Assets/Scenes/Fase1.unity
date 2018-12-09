@@ -518,7 +518,7 @@ MonoBehaviour:
   pontosProximoNivel: 1000
   numMaxBolas: 150
   MaxVida: 100
-  maxTime: 120
+  maxTime: 150
   timeMaxInformationCheckpointLoaded: 2
   chekpoints: f4010000
   maxCheckpointRestarts: 1

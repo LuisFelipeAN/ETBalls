@@ -18,7 +18,7 @@ public abstract class Subject
     {
         observers.Remove(o);
     }
-
+    //adicao do metodo para remover todos os observadores
     public void removeAllObservers()
     {
         observers.Clear();

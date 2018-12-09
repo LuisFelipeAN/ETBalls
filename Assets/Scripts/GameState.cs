@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class GameState: Subject
+public class GameState: Subject// Classe que implementa o padrão observer
 {
     private bool gameOver;
     private bool win;

@@ -45,7 +45,7 @@ MonoBehaviour:
   m_MinSize: {x: 683, y: 492}
   m_MaxSize: {x: 14004, y: 14042}
   vertical: 0
-  controlID: 108
+  controlID: 116
 --- !u!114 &3
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -210,7 +210,7 @@ MonoBehaviour:
   m_MinSize: {x: 406, y: 492}
   m_MaxSize: {x: 10002, y: 14042}
   vertical: 1
-  controlID: 27
+  controlID: 93
 --- !u!114 &10
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -234,7 +234,7 @@ MonoBehaviour:
   m_MinSize: {x: 406, y: 221}
   m_MaxSize: {x: 8006, y: 4021}
   vertical: 0
-  controlID: 28
+  controlID: 94
 --- !u!114 &11
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -365,10 +365,10 @@ MonoBehaviour:
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 39}
-    m_SelectedIDs: 640a0000
-    m_LastClickedID: 2660
-    m_ExpandedIDs: 000000006e0900007e0a00002e0b0000940c0000ce0c00004a2e000000ca9a3b
+    scrollPos: {x: 0, y: 55}
+    m_SelectedIDs: 6c0a0000
+    m_LastClickedID: 2668
+    m_ExpandedIDs: 0000000070090000860a0000380b0000aa0c0000e40c0000622e000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -396,7 +396,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 000000006e0900007e0a00002e0b0000940c0000ce0c00004a2e0000
+    m_ExpandedIDs: 0000000070090000860a0000380b0000aa0c0000e40c0000622e0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -512,23 +512,23 @@ MonoBehaviour:
   m_PersistentViewDataDictionary: {fileID: 0}
   m_TreeViewState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: c80c0000
+    m_SelectedIDs: de0c0000
     m_LastClickedID: 0
-    m_ExpandedIDs: 168befff40f4f1ff78f5f1ffcaf7f2ff46dcf3fffae2f3ffbc11f4fffc80f5ff3a92f5ffe033f7ff1442f9ff8229fbff86ecffff88f5ffffe6fbffff00000000b8580000c0580000d6580000c45f0000d65f0000
+    m_ExpandedIDs: 6e20fbff8c50fbff2658fbff2e68fbff508bfcff528dfcffc291fcffd495fcff4c9afcffb4b2fcffa4f7fcffeef8fcff5c8afffffeb4ffff94eaffffe6fbffff000000003c3a0000f43f0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
-      m_Name: 
-      m_OriginalName: 
+      m_Name: AreaCamera
+      m_OriginalName: AreaCamera
       m_EditFieldRect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 0
         height: 0
-      m_UserData: 0
+      m_UserData: -302298
       m_IsWaitingForDelay: 0
       m_IsRenaming: 0
-      m_OriginalEventType: 11
+      m_OriginalEventType: 0
       m_IsRenamingFilename: 0
       m_ClientGUIView: {fileID: 4}
     m_SearchString: 
@@ -564,7 +564,7 @@ MonoBehaviour:
     height: 459
   m_PersistentViewDataDictionary: {fileID: 0}
   m_SceneLighting: 1
-  lastFramingTime: 6244.488071693571
+  lastFramingTime: 6029.505483655983
   m_2DMode: 0
   m_isRotationLocked: 0
   m_AudioPlay: 0
@@ -599,13 +599,13 @@ MonoBehaviour:
       speed: 2
       m_Value: 0
   m_Rotation:
-    m_Target: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
+    m_Target: {x: 0, y: -0, z: 0, w: -0.99999994}
     speed: 2
-    m_Value: {x: -0.70710677, y: 0, z: 0, w: -0.70710677}
+    m_Value: {x: 0, y: 0, z: 0, w: -1}
   m_Size:
-    m_Target: 2.3598666
+    m_Target: 0.556234
     speed: 2
-    m_Value: 2.3598666
+    m_Value: 0.556234
   m_Ortho:
     m_Target: 0
     speed: 2
