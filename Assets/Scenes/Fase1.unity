@@ -514,14 +514,14 @@ MonoBehaviour:
   shotImpulse: 4000
   distanciaMaxParede: 0.5
   level: 1
-  isLastLevel: 1
+  isLastLevel: 0
   pontosProximoNivel: 1000
   numMaxBolas: 150
   MaxVida: 100
   maxTime: 120
   timeMaxInformationCheckpointLoaded: 2
   chekpoints: f4010000
-  maxCheckpointRestarts: 3
+  maxCheckpointRestarts: 1
   bullet: {fileID: 54150520057069792, guid: 4c8d5144ef3d90c45aea76b7afb5fed3, type: 2}
   bntRestartOnCheckpointPrefab: {fileID: 114494057258521992, guid: ddd0708dd076b9a4aab2440062b5708a,
     type: 2}
@@ -819,7 +819,7 @@ MonoBehaviour:
     type: 2}
   player: {fileID: 534669905}
   hordaCheckpointDuration: 20
-  timeSpanw: 1.8
+  timeSpanw: 1.5
 --- !u!65 &755584811
 BoxCollider:
   m_ObjectHideFlags: 0

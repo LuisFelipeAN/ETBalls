@@ -71,6 +71,7 @@ public class MainCameraController : MonoBehaviour,IObserver {
         textInformationCheckpoint = GameObject.Find("InformCheckpoint").GetComponent<Text>();
         chekpointDadosJogo = new List<Chekpoint>();
         timeText = GameObject.Find("TimeText").GetComponent<Text>();
+        DadosJogo.getInstance().clearObservers();
 
     }
     struct Chekpoint
@@ -86,8 +87,6 @@ public class MainCameraController : MonoBehaviour,IObserver {
         contCheckpointsRestarts = 0;
         actualCheckpoint = 0;
         dv = RectTransformVida.sizeDelta.x / MaxVida;
-
-        DadosJogo.getInstance().clearObservers();
         DadosJogo.getInstance().getGame().Win = false;
         DadosJogo.getInstance().GameOver = false;
         DadosJogo.getInstance().Bolas = 0;
@@ -112,10 +111,13 @@ public class MainCameraController : MonoBehaviour,IObserver {
         bntRestartOnCheckpoint.onClick.AddListener(loadLastCheckpoint);
 
 
-
+        
         actualTime = maxTime;
-        onChekpointLoad = false;
+
         timeCheckpointLoaded = 0;
+        textInformationCheckpoint.text = "Level " + level;
+        textInformationCheckpoint.enabled = true;
+        onChekpointLoad = true;
 
         initialOrientation = transform.localRotation;
         deslocamentoLateral = new Vector3();
@@ -216,7 +218,8 @@ public class MainCameraController : MonoBehaviour,IObserver {
             }
             else
             {
-                SceneManager.LoadScene("Fase" + level + 1, LoadSceneMode.Single);
+                int novoLevel = level + 1;
+                SceneManager.LoadScene("Fase" + novoLevel, LoadSceneMode.Single);
             }
         }
 
@@ -297,8 +300,6 @@ public class MainCameraController : MonoBehaviour,IObserver {
         onChekpointLoad = true;
 
         contCheckpointsRestarts++;
-
-        scriptSalaController.startHordaCheckpoint();
 
         disableButtons();
        

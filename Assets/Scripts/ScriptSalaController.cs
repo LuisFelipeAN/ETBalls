@@ -23,7 +23,7 @@ public class ScriptSalaController : MonoBehaviour,IObserver {
 
     private static Cell[][][] mat;
     private static int numInimigosAtivos;
-    private static int maxInimigosAtivosPeriodicamente=7;
+    private static int maxInimigosAtivosPeriodicamente=10;
 
     public static void desocuparMatriz(int x,int y,int z)
     {
@@ -97,31 +97,33 @@ public class ScriptSalaController : MonoBehaviour,IObserver {
     }
     public void spanwEnemy()
     {
-        int x, y, z;
-        x = RandomGenerator.Instance.getRamdom(0, largura);
-        y = RandomGenerator.Instance.getRamdom(0, altura);
-        z = RandomGenerator.Instance.getRamdom(0, comprimento);
-
-        //Debug.Log(x + ", " + y + ", " + z);
-        int tentativas = 0;
-        while (mat[x][y][z].ocupada && tentativas < 100)
+        if (!gameOver)
         {
+            int x, y, z;
             x = RandomGenerator.Instance.getRamdom(0, largura);
             y = RandomGenerator.Instance.getRamdom(0, altura);
             z = RandomGenerator.Instance.getRamdom(0, comprimento);
-            tentativas++;
-        }
-        if (!mat[x][y][z].ocupada)
-        {
-            mat[x][y][z].ocupada = true;
-            Vector3 positionCanon = mat[x][y][z].position;
 
-            GameObject enemy = Object.Instantiate(enemyPrefab);
-            enemy.transform.position = positionCanon;
-            ScriptEnemyController scriptEnemyController = enemy.GetComponent<ScriptEnemyController>();
-            scriptEnemyController.player = player;
-            scriptEnemyController.CellPosition = new Vector3Int(x, y, z);
-            numInimigosAtivos++;
+            int tentativas = 0;
+            while (mat[x][y][z].ocupada && tentativas < 100)
+            {
+                x = RandomGenerator.Instance.getRamdom(0, largura);
+                y = RandomGenerator.Instance.getRamdom(0, altura);
+                z = RandomGenerator.Instance.getRamdom(0, comprimento);
+                tentativas++;
+            }
+            if (!mat[x][y][z].ocupada)
+            {
+                mat[x][y][z].ocupada = true;
+                Vector3 positionCanon = mat[x][y][z].position;
+
+                GameObject enemy = Object.Instantiate(enemyPrefab);
+                enemy.transform.position = positionCanon;
+                ScriptEnemyController scriptEnemyController = enemy.GetComponent<ScriptEnemyController>();
+                scriptEnemyController.player = player;
+                scriptEnemyController.CellPosition = new Vector3Int(x, y, z);
+                numInimigosAtivos++;
+            }
         }
     }
 

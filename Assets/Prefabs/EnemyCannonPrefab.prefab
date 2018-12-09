@@ -335,8 +335,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bolaPrefab: {fileID: 1108205190795318, guid: f056f82f04bf6314c9a08d0a1466674b, type: 2}
   shootInpulse: 1500
-  timeShootInterval: 0.5
-  timeDelayToStartShoot: 1
+  timeShootInterval: 1
+  timeDelayToStartShoot: 0.5
 --- !u!114 &114631377115521142
 MonoBehaviour:
   m_ObjectHideFlags: 1
