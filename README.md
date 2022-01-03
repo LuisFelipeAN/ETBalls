@@ -1,2 +1,2 @@
 # ETBalls
-## A 3D Game bult upon Unit3
+## A 3D Shooting Game built using Unit3
